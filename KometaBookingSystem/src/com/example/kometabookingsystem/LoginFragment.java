@@ -1,16 +1,11 @@
 package com.example.kometabookingsystem;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import com.example.library.DatabaseHandler;
-import com.example.library.UserFunctions;
-import com.example.login.MainFragmentActivity;
-import com.example.login.RegisterActivity;
+
 
 import android.R.string;
 import android.app.Activity;
-import android.content.Intent;
+
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -31,28 +26,21 @@ public class LoginFragment extends Fragment {
 	EditText inputPassword;
 	TextView loginErrorMsg;
 
-	// JSON Response node names
-	private static String KEY_SUCCESS = "success";
-	private static String KEY_ERROR = "error";
-	private static String KEY_ERROR_MSG = "error_msg";
-	private static String KEY_UID = "uid";
-	private static String KEY_NAME = "name";
-	private static String KEY_EMAIL = "email";
-	private static String KEY_CREATED_AT = "created_at";
+
 	
-	public interface UiListener{
+	public interface UiLoginListener{
             public void onRegisterClicked();
-            public void onLoginClicked();
+            public void onLoginClicked(String name,String password);
            
     }
     
-    private UiListener uiCallback;
+    private UiLoginListener uiCallback;
     
     @Override
     public void onAttach(Activity activity) {               
             super.onAttach(activity);               
             try{
-                    uiCallback = (UiListener) activity; // check if the interface is implemented
+                    uiCallback = (UiLoginListener) activity; // check if the interface is implemented
             }catch(ClassCastException e){
                     e.printStackTrace();
             }
@@ -81,7 +69,7 @@ public class LoginFragment extends Fragment {
 
         			public void onClick(View view) {
         				
-        				uiCallback.onLoginClicked();
+        				uiCallback.onLoginClicked(inputEmail.getText().toString(),inputPassword.getText().toString());
         			
         			}
         		});

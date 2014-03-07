@@ -1,12 +1,7 @@
 package com.example.kometabookingsystem;
 
-import org.json.JSONException;
-import org.json.JSONObject;
 
-import com.example.library.DatabaseHandler;
-import com.example.library.UserFunctions;
-import com.example.login.MainFragmentActivity;
-import com.example.login.RegisterActivity;
+
 
 import android.R.string;
 import android.app.Activity;
@@ -43,7 +38,7 @@ public class RegisterFragment extends Fragment {
 
 	
 	public interface UiRegisterListener{
-            public void onSendRegister();
+            public void onSendRegister(String name, String password,String email);
             
            
     }
@@ -82,7 +77,7 @@ public class RegisterFragment extends Fragment {
     		// Register Button Click event
     		btnRegister.setOnClickListener(new View.OnClickListener() {			
     			public void onClick(View view) {
-    				uiCallback.onSendRegister();
+    				uiCallback.onSendRegister(inputFullName.getText().toString(), inputPassword.getText().toString(),inputEmail.getText().toString());
     			}
     		});
     }
